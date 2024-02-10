@@ -1,10 +1,10 @@
-def writefile(todotxt):
-    with open('files/ToDo.txt', 'w') as newfile:
+def writefile(fp, todotxt):
+    with open(fp, 'w') as newfile:
         newfile.writelines(todotxt)
 
 
-def showfile():
-    for position, task in enumerate(todos):
+def showtodo(tdl):
+    for position, task in enumerate(tdl):
         print(f'{position + 1}: {task}', end='')
 
 
@@ -12,13 +12,15 @@ def remaction(st, ln):
     return st[ln:]
 
 
-enter_prompt = 'Choose your Action Add, Show, Edit, Complete, Exit: '
+enter_prompt = 'Choose your Action Add, Show, Edit, Complete, Clear, Exit: '
 
-with open('files/ToDo.txt', 'r') as file:
+filepath = "files/ToDo.txt"
+
+with open(filepath, 'r') as file:
     todos = file.readlines()
 
 print(f'existing todos are:')
-showfile()
+showtodo(todos)
 
 while True:
     action = input(enter_prompt).strip().upper()
@@ -26,28 +28,33 @@ while True:
     if action.startswith('ADD'):
         todo = remaction(action, 3).strip().upper() + '\n'
         todos.append(todo)
-        writefile(todos)
+        writefile(filepath, todos)
 
     elif action == 'SHOW':
-        showfile()
+        showtodo(todos)
 
     elif action.startswith('EDIT'):
-        ed = int(remaction(action, 4).strip().upper())
-        todos[ed - 1] = input('Enter a new ToDo: ').strip().upper() + '\n'
+        try:
+            ed = int(remaction(action, 4).strip().upper())
+            todos[ed - 1] = input('Enter a new ToDo: ').strip().upper() + '\n'
+            writefile(filepath, todos)
 
-        writefile(todos)
+        except ValueError:
+            print("Your command is not valid")
+            continue
 
     elif action.startswith('COMPLETE'):
         remC = remaction(action, 8).strip().upper()
 
         if remC.isnumeric():
             ind = int(remC) - 1
-            if ind < len(todos):
+            try:
                 print(f'COMPLETING {todos[ind][:-1]}')
-                remC = todos[ind]
-            else:
+                remC = todos[ind][:-1]
+            except IndexError:
                 print('Enter valid Position')
                 continue
+
         remC += '\n'
         if remC in todos:
             todos.remove(remC)
@@ -55,7 +62,10 @@ while True:
         else:
             print('This ToDo does not Exist')
 
-        writefile(todos)
+        writefile(filepath, todos)
+
+    elif action == 'CLEAR':
+        todos = []
 
     elif action == 'EXIT':
         break
@@ -64,4 +74,3 @@ while True:
         print('Enter Valid Option')
 
 print('Bye')
-print('Hello world')
