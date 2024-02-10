@@ -1,1 +1,1 @@
-##Simple todo list using Python CLI
+# **Simple todo list in Python CLI**
