@@ -1,23 +1,36 @@
-def writefile(fp, todotxt):
+def readfile(fp = "files/ToDo.txt"):
+    """
+    Reads the text file and returns the list of ToDo items
+    """
+    with open(fp, 'r') as file:
+        tdl = file.readlines()
+    return tdl
+
+
+def writefile(todotxt, fp = "files/ToDo.txt"):
+    """
+    Writes the content of list in provide filepath
+    """
     with open(fp, 'w') as newfile:
         newfile.writelines(todotxt)
 
 
 def showtodo(tdl):
+    """ Prints ToDo list """
     for position, task in enumerate(tdl):
         print(f'{position + 1}: {task}', end='')
 
 
 def remaction(st, ln):
+    """ Removes input action and return the string """
     return st[ln:]
 
 
 enter_prompt = 'Choose your Action Add, Show, Edit, Complete, Clear, Exit: '
 
-filepath = "files/ToDo.txt"
+# filepath = "files/ToDo.txt"
 
-with open(filepath, 'r') as file:
-    todos = file.readlines()
+todos = readfile()
 
 print(f'existing todos are:')
 showtodo(todos)
@@ -28,7 +41,7 @@ while True:
     if action.startswith('ADD'):
         todo = remaction(action, 3).strip().upper() + '\n'
         todos.append(todo)
-        writefile(filepath, todos)
+        writefile(todos)
 
     elif action == 'SHOW':
         showtodo(todos)
@@ -37,7 +50,7 @@ while True:
         try:
             ed = int(remaction(action, 4).strip().upper())
             todos[ed - 1] = input('Enter a new ToDo: ').strip().upper() + '\n'
-            writefile(filepath, todos)
+            writefile(todos)
 
         except ValueError:
             print("Your command is not valid")
@@ -62,7 +75,7 @@ while True:
         else:
             print('This ToDo does not Exist')
 
-        writefile(filepath, todos)
+        writefile(todos)
 
     elif action == 'CLEAR':
         todos = []
