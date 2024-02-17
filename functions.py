@@ -1,4 +1,7 @@
-def readfile(fp="files/ToDo.txt"):
+FILEPATH = "files/ToDo.txt"
+
+
+def readfile(fp=FILEPATH):
     """
     Reads the text file and returns the list of ToDo items
     """
@@ -7,7 +10,7 @@ def readfile(fp="files/ToDo.txt"):
     return tdl
 
 
-def writefile(todotxt, fp="files/ToDo.txt"):
+def writefile(todotxt, fp=FILEPATH):
     """
     Writes the content of list in provide filepath
     """
