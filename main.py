@@ -10,6 +10,7 @@ enter_prompt = 'Choose your Action Add, Show, Edit, Complete, Clear, Exit: '
 todos = functions.readfile()
 
 now = time.strftime("It is %b %d, %Y %H:%M:%S")
+
 print(now)
 
 print(f'existing todos are:')
