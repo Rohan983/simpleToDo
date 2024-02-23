@@ -13,7 +13,7 @@ now = time.strftime("It is %b %d, %Y %H:%M:%S")
 print(now)
 
 print(f'existing todos are:')
-functions.showtodo(todos)
+functions.showtodo()
 
 while True:
     action = input(enter_prompt).strip().upper()
@@ -24,7 +24,7 @@ while True:
         functions.writefile(todos)
 
     elif action == 'SHOW':
-        functions.showtodo(todos)
+        functions.showtodo()
 
     elif action.startswith('EDIT'):
         try:
