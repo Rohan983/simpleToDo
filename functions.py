@@ -18,8 +18,9 @@ def writefile(todotxt, fp=FILEPATH):
         newfile.writelines(todotxt)
 
 
-def showtodo(tdl):
+def showtodo(fp=FILEPATH):
     """ Prints ToDo list """
+    tdl = readfile(fp)
     for position, task in enumerate(tdl):
         print(f'{position + 1}: {task}', end='')
 
