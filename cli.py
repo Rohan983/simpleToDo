@@ -1,5 +1,3 @@
-import time
-
 import functions
 import time
 

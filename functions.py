@@ -1,4 +1,4 @@
-FILEPATH = "files/ToDo.txt"
+FILEPATH = "ToDo.txt"
 
 
 def readfile(fp=FILEPATH):
