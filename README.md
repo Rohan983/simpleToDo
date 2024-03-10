@@ -1,1 +1,1 @@
-# **Simple todo list in Python CLI and Steamlit Web Appication**
+# **Simple todo list in Python CLI and GUI**
